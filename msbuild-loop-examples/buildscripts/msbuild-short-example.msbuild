@@ -1,5 +1,30 @@
 <?xml version="1.0"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <ItemGroup>
+    <MyListWithCustomMetaData Include="nothing">
+      <CustomProperty>Item1</CustomProperty>
+    </MyListWithCustomMetaData>
+    <MyListWithCustomMetaData Include="nothing">
+      <CustomProperty>Item2</CustomProperty>
+    </MyListWithCustomMetaData>
+    <MyListWithCustomMetaData Include="nothing">
+      <CustomProperty>Item3</CustomProperty>
+    </MyListWithCustomMetaData>
+  </ItemGroup>
+
+  <Target Name="BuildCustomItemGroup" DependsOnTargets="LoopCustomItemGroup">    
+  </Target>
+  
+  <Target Name="LoopCustomItemGroup"
+          Inputs="%(MyListWithCustomMetaData.Filename)"
+          Outputs="%(MyListWithCustomMetaData.OuputData)_data"
+          >
+    <Message Text="CurrentItem: %(MyListWithCustomMetaData.CustomProperty)" 
+             Importance="high"/>
+  </Target>
+  
+  
   <ItemGroup>
     <AllMsBuildFiles Include="*.msbuild"/>
   </ItemGroup>
